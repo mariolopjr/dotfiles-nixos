@@ -70,7 +70,7 @@ password_selector
 
 # Formatting the LUKS Container as BTRFS.
 print "Formatting the LUKS container as BTRFS."
-mkfs.btrfs $BTRFS
+mkfs.btrfs $BTRFS -L BTRFSROOT
 mount $BTRFS /mnt
 
 # Creating BTRFS subvolumes.
