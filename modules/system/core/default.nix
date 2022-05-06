@@ -5,9 +5,9 @@
   ...
 }:
 with lib; let
-  cfg = config.mario.core;
+  cfg = config.m.core;
 in {
-  options.mario.core = {
+  options.m.core = {
     enable = mkOption {
       description = "Enable core options";
       type = types.bool;

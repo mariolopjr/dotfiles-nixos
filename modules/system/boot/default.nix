@@ -5,9 +5,9 @@
   ...
 }:
 with lib; let
-  cfg = config.mario.boot;
+  cfg = config.m.boot;
 in {
-  options.mario.boot = {
+  options.m.boot = {
     type = mkOption {
       description = "Type of boot. Default encrypted-efi";
       default = null;

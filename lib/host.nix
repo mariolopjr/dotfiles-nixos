@@ -92,7 +92,7 @@ with utils; {
           {
             imports = [(import ../modules/system {inherit inputs;})] ++ sys_users;
 
-            jd = systemConfigStripped;
+            m = systemConfigStripped;
 
             environment.etc = {
               "hmsystemdata.json".text = toJSON userCfg;

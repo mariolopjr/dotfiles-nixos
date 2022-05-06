@@ -35,7 +35,7 @@ with builtins; {
           config.machineData = machineData;
         };
       in {
-        jd = userConfig;
+        m = userConfig;
 
         nixpkgs.overlays = overlays;
         nixpkgs.config.allowUnfree = true;
