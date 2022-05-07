@@ -10,10 +10,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # deploy-rs = {
+    #   url = "github:serokell/deploy-rs";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     agenix = {
       url = "github:ryantm/agenix";
@@ -48,7 +48,7 @@
     self,
     nixpkgs,
     nixpkgs-emoji,
-    deploy-rs,
+    # deploy-rs,
     agenix,
     microvm-nix,
     secrets,
@@ -167,20 +167,20 @@
       // {
         groups = defaultUser.groups ++ ["networkmanager" "video" "libvirtd"];
       };
-    in {
-      installMedia = {
-        kde = host.mkISO {
-          name = "nixos";
-          kernelPackage = pkgs.linuxPackages_latest;
-          initrdMods = ["xhci_pci" "ahci" "usb_storage" "sd_mod" "nvme" "usbhid"];
-          kernelMods = ["kvm-intel" "kvm-amd"];
-          kernelParams = [];
-          systemConfig = {};
-        };
-      };
+  in {
+    # installMedia = {
+    #   kde = host.mkISO {
+    #     name = "nixos";
+    #     kernelPackage = pkgs.linuxPackages_latest;
+    #     initrdMods = ["xhci_pci" "ahci" "usb_storage" "sd_mod" "nvme" "usbhid"];
+    #     kernelMods = ["kvm-intel" "kvm-amd"];
+    #     kernelParams = [];
+    #     systemConfig = {};
+    #   };
+    # };
 
     homeManagerConfigurations = {
-      mario = user.mkHMUser {
+      m = user.mkHMUser {
         userConfig = {
           graphical = {
             applications = {
@@ -217,9 +217,9 @@
       };
     };
 
-    checks =
-      builtins.mapAttrs
-      (system: deployLib: deployLib.deployChecks self.deploy)
-      deploy-rs.lib;
+    # checks =
+    #   builtins.mapAttrs
+    #   (system: deployLib: deployLib.deployChecks self.deploy)
+    #   deploy-rs.lib;
   };
 }

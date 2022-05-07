@@ -24,16 +24,15 @@ in {
   config = mkIf (cfg.enable) {
     services.xserver = {
       videoDrivers = [ "nvidia" ];
-      displayManager.gdm.nvidiaWayland = true;
     };
 
     hardware.nvidia.package =
-      mkIf cfg.beta-driver config.boot.kernelPackages.nvidiaPackages.beta;
+      mkIf cfg.enable-beta config.boot.kernelPackages.nvidiaPackages.beta;
 
     environment.systemPackages = with pkgs;
       [
         "nvidia-x11"
         "nvidia-settings"
-      ]
+      ];
   };
 }

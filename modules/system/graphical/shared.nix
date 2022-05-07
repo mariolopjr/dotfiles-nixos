@@ -24,14 +24,14 @@ in {
 
     hardware.opengl = {
       enable = true;
-      extraPackages = [];
+      extraPackages = []
       ++ (
-          if cfg.nvidia.enable
-          then []
-          else [
-              pkgs.mesa.drivers
-          ]
-        )
+        if cfg.nvidia.enable
+        then []
+        else [
+            pkgs.mesa.drivers
+        ]
+      );
     };
 
     environment.etc = {

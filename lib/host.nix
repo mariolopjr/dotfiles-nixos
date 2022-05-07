@@ -8,37 +8,37 @@
 }:
 with builtins;
 with utils; {
-  mkISO = {
-    name,
-    initrdMods,
-    kernelMods,
-    kernelParams,
-    kernelPackage,
-    systemConfig,
-  }:
-    lib.nixosSystem {
-      inherit system;
+  # mkISO = {
+  #   name,
+  #   initrdMods,
+  #   kernelMods,
+  #   kernelParams,
+  #   kernelPackage,
+  #   systemConfig,
+  # }:
+  #   lib.nixosSystem {
+  #     inherit system;
 
-      specialArgs = {};
+  #     specialArgs = {};
 
-      modules = [
-        {
-          imports = [../modules/iso];
+  #     modules = [
+  #       {
+  #         imports = [../modules/iso];
 
-          networking.hostName = "${name}";
-          networking.networkmanager.enable = true;
-          networking.useDHCP = false;
+  #         networking.hostName = "${name}";
+  #         networking.networkmanager.enable = true;
+  #         networking.useDHCP = false;
 
-          boot.initrd.availableKernelModules = initrdMods;
-          boot.kernelModules = kernelMods;
+  #         boot.initrd.availableKernelModules = initrdMods;
+  #         boot.kernelModules = kernelMods;
 
-          boot.kernelParams = kernelParams;
-          boot.kernelPackages = kernelPackage;
+  #         boot.kernelParams = kernelParams;
+  #         boot.kernelPackages = kernelPackage;
 
-          nixpkgs.pkgs = pkgs;
-        }
-      ];
-    };
+  #         nixpkgs.pkgs = pkgs;
+  #       }
+  #     ];
+  #   };
 
   mkHost = {
     name,
@@ -60,16 +60,16 @@ with utils; {
 
     enable = ["enable"];
     extraContainerPath = ["extraContainer"];
-    impermanencePath = ["impermanence"];
+    # impermanencePath = ["impermanence"];
     qemuPath = ["isQemuGuest"];
     moduleFolder = "/modules/system/";
 
     systemConfigStripped =
-      removeModuleOptions
-      {
-        path = impermanencePath;
-        activate = enable;
-      }
+      # removeModuleOptions
+      # {
+      #   path = impermanencePath;
+      #   activate = enable;
+      # }
       (removeModuleOptions
         {
           path = extraContainerPath;
@@ -117,10 +117,10 @@ with utils; {
         ]
         ++ [inputs.agenix.nixosModule]
         ++ (systemEnableModule (import (inputs.nixpkgs + "/nixos/modules/profiles/qemu-guest.nix")) qemuPath)
-        ++ (systemEnableModuleConfig inputs.impermanence.nixosModule moduleFolder {
-          path = impermanencePath;
-          activate = enable;
-        })
+        # ++ (systemEnableModuleConfig inputs.impermanence.nixosModule moduleFolder {
+        #   path = impermanencePath;
+        #   activate = enable;
+        # })
         ++ (systemEnableModuleConfig inputs.extra-container.nixosModule moduleFolder {
           path = extraContainerPath;
           activate = enable;

@@ -3,7 +3,7 @@
   home-manager,
   lib,
   system,
-  overlays,
+  # overlays,
   ...
 }:
 with builtins; {
@@ -37,7 +37,7 @@ with builtins; {
       in {
         m = userConfig;
 
-        nixpkgs.overlays = overlays;
+        # nixpkgs.overlays = overlays;
         nixpkgs.config.allowUnfree = true;
 
         systemd.user.startServices = true;
@@ -45,7 +45,7 @@ with builtins; {
         home.username = username;
         home.homeDirectory = "/home/${username}";
 
-        imports = [../modules/users machineModule pkgs.homeage.homeManagerModules.homeage];
+        imports = [../modules/user machineModule pkgs.homeage.homeManagerModules.homeage];
       };
       homeDirectory = "/home/${username}";
     };
